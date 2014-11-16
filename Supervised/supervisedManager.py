@@ -21,6 +21,8 @@ from Configuration.settings import spanishNaiveBayes , spanishSVM , spanishMaxEn
 from Configuration.settings import pclassAll, pclassAllTF, pclassPNeg, pclassPNegTF, pclassPNeu, pclassPNeuTF, pclassNegNeu, pclassNegNeuTF
 from Configuration.settings import trainSpanish , trainPeruvian , testSpanish , testPeruvian
 from Utils.XmlManager import XManager as XM
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 import cPickle
 trainPrueba = 'peruvianTest.xml'
 
@@ -460,6 +462,25 @@ class SupervisedManager(object):
             commentsModeled.append(vec)           
         return commentsModeled
     
+    def show_classificator_report(self , y_true , y_predicted):
+        y_true_new = []
+        y_predicted_new = []
+        for i in range(len(y_true)):
+            if y_true[i] == 'P':
+                y_true_new.append(1)
+            if y_predicted[i] == 'P':
+                y_predicted_new.append(1)
+            if y_true[i] == 'N':
+                y_true_new.append(-1)
+            if y_predicted[i] == 'N':
+                y_predicted_new.append(-1)
+            if y_true[i] == 'NEU':
+                y_true_new.append(0)
+            if y_predicted[i] == 'NEU':
+                y_predicted_new.append(0)
+        print classification_report(y_true_new , y_predicted_new)
+        print confusion_matrix(y_true_new, y_predicted_new) 
+    
     def testClassifier(self , typeClassifier , domain):
         names =[pclassAll, pclassAllTF, pclassPNeg, pclassPNegTF, pclassPNeu, pclassPNeuTF, pclassNegNeu, pclassNegNeuTF]
         classifiersP = [peruvianSVM, peruvianNaiveBayes, peruvianMaxEnt, peruvianDecTree]
@@ -470,24 +491,40 @@ class SupervisedManager(object):
             dataTest = self.get_data_test_spanish()
         
         
-        for i in range(1,8):
+        for i in range(1,9):
+            print "------------------------------------------------------------"
+            print i             
             classifier = self.load_classifier(domain, typeClassifier, i)
             if typeClassifier == 1:
                 print "Analyzing Support Vector Machine"
                 classifierTrained = SVM()
-                classifierTrained.set_classifier(classifier)                 
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                y_true = dataTest[i-1][1]
+                self.show_classificator_report(y_true, predictions)
+                                 
             elif typeClassifier == 2:
                 print "Analyzing Naive Bayes"
                 classifierTrained = NB()
                 classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                y_true = dataTest[i-1][1]
+                self.show_classificator_report(y_true, predictions)
             elif typeClassifier == 3:
                 print "Analyzing Max Entropy"
                 classifierTrained = ME()
                 classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                y_true = dataTest[i-1][1]
+                self.show_classificator_report(y_true, predictions)
             elif typeClassifier == 4:
                 print "Analyzing Decision Tree"
                 classifierTrained = DT()
                 classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                y_true = dataTest[i-1][1]
+                self.show_classificator_report(y_true, predictions)
+            print "------------------------------------------------------------"
                        
                     
     
@@ -501,7 +538,7 @@ if __name__ == '__main__':
     #manager.prepare_all_models()
     #manager.prepare_all_classifiers()
     
-    manager.testClassifier(3, 1)
+    manager.testClassifier(4, 2)
     
     
     
