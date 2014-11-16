@@ -525,6 +525,18 @@ class SupervisedManager(object):
                 y_true = dataTest[i-1][1]
                 self.show_classificator_report(y_true, predictions)
             print "------------------------------------------------------------"
+        
+    def optimize_classifier(self , typeClassifier , domain):                
+        classifiersP = [peruvianSVM, peruvianNaiveBayes, peruvianMaxEnt, peruvianDecTree]
+        if domain == 1:
+            dataTest = self.get_data_test_peruvian()
+        else:
+            dataTest = self.get_data_test_spanish()
+        
+        for i in range(3 , 8 , 2):
+            print i
+            classifier = self.load_classifier(domain, typeClassifier, i)
+         
                        
                     
     
@@ -538,7 +550,8 @@ if __name__ == '__main__':
     #manager.prepare_all_models()
     #manager.prepare_all_classifiers()
     
-    manager.testClassifier(4, 2)
+    #manager.testClassifier(4, 2)
+    manager.optimize_classifier(1, 1)
     
     
     
