@@ -140,6 +140,17 @@ class Comment_proccesor(object):
         else:
             return self.lemmatized_comment(result)
             #return result 
+    
+    def remove_punctuation_marks(self , word):
+        """ Elimina los signos de puntuacion de un texto """
+        if re.match("^[a-z0-9\xE1\xE9\xED\xF3\xFA\xF1]+$", word):
+            return word
+        else:
+            new_word = ""
+            for i in range(len(word)):
+                if re.match("[\w\xE1\xE9\xED\xF3\xFA\xF1]", word[i]):
+                    new_word += word[i]
+            return new_word 
 
     def get_processed_comment(self):
         return self.__new_comment

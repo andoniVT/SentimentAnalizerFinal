@@ -42,13 +42,13 @@ class SupervisedManager(object):
         '''
          Prepare peruvian models
         '''
-        domainData = self.get_Traincomments(trainPeruvian)  # [0 1 2 3]
+        domainData = self.get_Traincomments(trainPeruvian)  
         folders = [pmodelAll , pmodelPNeg , pmodelPNeu , pmodelNegNeu]  
         names = [nameVectorizer , nameCorpus , nameTFVectorizer , nameTFCorpus]                
         for i in range(len(domainData)):
             print domainData[i][0]
             model = VM(domainData[i][0])
-            allmodels = model.prepare_models() # 0 1 2 3                                    
+            allmodels = model.prepare_models()                                     
             for j in range(len(allmodels)):                
                 print folders[i] + names[j]
                 with open(folders[i] + names[j] , 'wb') as fid:
@@ -56,20 +56,17 @@ class SupervisedManager(object):
         
         '''
         Prepare spanish models
-        '''
-        
-        domainData = self.get_Traincomments(trainSpanish)  # [0 1 2 3]
+        '''        
+        domainData = self.get_Traincomments(trainSpanish)   
         folders = [smodelAll , smodelPNeg , smodelPNeu , smodelNegNeu]  
         names = [nameVectorizer , nameCorpus , nameTFVectorizer , nameTFCorpus]                
         for i in range(len(domainData)):
             model = VM(domainData[i][0])
-            allmodels = model.prepare_models() # 0 1 2 3                                    
+            allmodels = model.prepare_models()                                      
             for j in range(len(allmodels)):                
                 with open(folders[i] + names[j] , 'wb') as fid:
                     cPickle.dump(allmodels[j] , fid)
-         
-                                 
-    
+                                              
     def prepare_all_classifiers(self):
         '''
           Training peruvian classifiers
@@ -131,9 +128,7 @@ class SupervisedManager(object):
                 with open(spanishDecTree + class_names[name_index] , 'wb') as fid:
                     cPickle.dump(trained4 , fid)                                                                    
                 name_index+=1
-        
-        
-    
+                    
     def load_classifier(self):
         pass
     
