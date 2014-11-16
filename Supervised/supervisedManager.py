@@ -129,43 +129,296 @@ class SupervisedManager(object):
                     cPickle.dump(trained4 , fid)                                                                    
                 name_index+=1
                     
-    def load_classifier(self):
-        pass
+    def load_classifier(self , domain , type , ctype):
+        if domain == 1:
+            print "Peruvian Classifier" 
+            if type == 1:
+                print "SVM"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = peruvianSVM + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = peruvianSVM + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = peruvianSVM + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = peruvianSVM + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = peruvianSVM + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = peruvianSVM + pclassPNeuTF
+                    print location                     
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = peruvianSVM + pclassNegNeu
+                    print location                     
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = peruvianSVM + pclassNegNeuTF
+                    print location                    
+            elif type == 2:
+                print "Naive Bayes"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = peruvianNaiveBayes + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = peruvianNaiveBayes + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = peruvianNaiveBayes + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = peruvianNaiveBayes + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = peruvianNaiveBayes + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = peruvianNaiveBayes + pclassPNeuTF
+                    print location                     
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = peruvianNaiveBayes + pclassNegNeu
+                    print location                     
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = peruvianNaiveBayes + pclassNegNeuTF
+                    print location
+            elif type == 3:
+                print "Max Entropy"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = peruvianMaxEnt + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = peruvianMaxEnt + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = peruvianMaxEnt + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = peruvianMaxEnt + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = peruvianMaxEnt + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = peruvianMaxEnt + pclassPNeuTF
+                    print location                     
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = peruvianMaxEnt + pclassNegNeu
+                    print location                     
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = peruvianMaxEnt + pclassNegNeuTF
+                    print location
+            elif type == 4:
+                print "Decision Tree"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = peruvianDecTree + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = peruvianDecTree + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = peruvianDecTree + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = peruvianDecTree + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = peruvianDecTree + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = peruvianDecTree + pclassPNeuTF
+                    print location                     
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = peruvianDecTree + pclassNegNeu
+                    print location                     
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = peruvianDecTree + pclassNegNeuTF
+                    print location
+        else:
+            print "Spanish Classifier"
+            if type == 1:
+                print "SVM"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = spanishSVM + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = spanishSVM + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = spanishSVM + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = spanishSVM + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = spanishSVM + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = spanishSVM + pclassPNeuTF
+                    print location                     
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = spanishSVM + pclassNegNeu
+                    print location                     
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = spanishSVM + pclassNegNeuTF
+                    print location                    
+            elif type == 2:
+                print "Naive Bayes"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = spanishNaiveBayes + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = spanishNaiveBayes + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = spanishNaiveBayes + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = spanishNaiveBayes + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = spanishNaiveBayes + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = spanishNaiveBayes + pclassPNeuTF
+                    print location                     
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = spanishNaiveBayes + pclassNegNeu
+                    print location                     
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = spanishNaiveBayes + pclassNegNeuTF
+                    print location
+            elif type == 3:
+                print "Max Entropy"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = spanishMaxEnt + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = spanishMaxEnt + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = spanishMaxEnt + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = spanishMaxEnt + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = spanishMaxEnt + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = spanishMaxEnt + pclassPNeuTF
+                    print location                     
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = spanishMaxEnt + pclassNegNeu
+                    print location                     
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = spanishMaxEnt + pclassNegNeuTF
+                    print location
+            elif type == 4:
+                print "Decision Tree"
+                if ctype == 1:
+                    print "PNN classifier"                    
+                    location = spanishDecTree + pclassAll
+                    print location
+                elif ctype == 2:
+                    print "PNN TF classifier"
+                    location = spanishDecTree + pclassAllTF
+                    print location                    
+                elif ctype == 3:
+                    print "PNeg classifier"
+                    location = spanishDecTree + pclassPNeg
+                    print location                    
+                elif ctype == 4:
+                    print "PNeg TF classifier"
+                    location = spanishDecTree + pclassPNegTF
+                    print location                     
+                elif ctype == 5:
+                    print "PNeu classifier"
+                    location = spanishDecTree + pclassPNeu
+                    print location                     
+                elif ctype == 6:
+                    print "PNeu TF classifier"
+                    location = spanishDecTree + pclassPNeuTF
+                    print location 
+                elif ctype == 7:
+                    print "NegNeu classifier"
+                    location = spanishDecTree + pclassNegNeu
+                    print location          
+                elif ctype == 8:
+                    print "NegNeu TF classifier"
+                    location = spanishDecTree + pclassNegNeuTF
+                    print location        
+        with open(location , 'rb') as fid:
+            clf_load = cPickle.load(fid)  
+        return clf_load  
     
 if __name__ == '__main__':
     
     manager = SupervisedManager()
+    classifier_loaded = manager.load_classifier(1, 1, 1)
+    classifier = SVM()
+    classifier.set_classifier(classifier_loaded)
+    #information = classifier.classify(test_data)
     #manager.prepare_all_models()
-    manager.prepare_all_classifiers()
-    
-    '''
-    data = [[1,2,3,4] , [5,2,1,4] , [6,1,4,2]]
-    labels = [0 , 1, 1]    
-    classifier = NB(data , labels)
-    trained = classifier.train()    
-    with open(peruvianNaiveBayes + "/test.pk1" , 'wb') as fid:
-        cPickle.dump(trained , fid)            
-    with open(peruvianNaiveBayes + "/test.pk1" , 'rb') as fid:
-        clf_load = cPickle.load(fid)    
-    classifier2 = NB()
-    classifier2.set_classifier(clf_load)
-    data = classifier2.classify([[1,5,6,8]])
-    for i in data:
-        print i
-    
-    
-    
-    comentarios = ['esta es una prueba' , 'yo me llamo andoni' , 'este es otro comentario' , 'esta es otra prueba']
-    model = VM(comentarios)
-    modelos = model.prepare_models()
-    
-    vectorizer = modelos[0] 
-    corpus_simple_vector = modelos[1] 
-    transformer = modelos[2]  
-    corpus_tf_idf = modelos[3]    
-    print model.get_comment_frequency_vector(["comentario de prueba"])
-    print model.get_comment_tf_idf_vector(["comentario de prueba"])      
-    '''
+    #manager.prepare_all_classifiers()
     
     
     
