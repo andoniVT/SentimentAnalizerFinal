@@ -27,11 +27,10 @@ class VectorModel(object):
         self.__corpus_tf_idf = tfidf.toarray()
         return [self.__vectorizer , self.__corpus_simple_vector , self.__transformer , self.__corpus_tf_idf]
     
-    def set_models(self , vectorizer , corpus , transformer, tfcorpus):
+    def set_models(self , vectorizer , transformer):    
         self.__vectorizer = vectorizer
-        self.__corpus_simple_vector = corpus
         self.__transformer = transformer
-        self.__corpus_tf_idf = tfcorpus
+        
     
     def get_comment_frequency_vector(self , comments):
         vec_comments = []

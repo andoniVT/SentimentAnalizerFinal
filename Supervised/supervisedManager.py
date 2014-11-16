@@ -410,15 +410,70 @@ class SupervisedManager(object):
             clf_load = cPickle.load(fid)  
         return clf_load  
     
+    def get_data_test_peruvian(self):
+        testData = self.get_Traincomments(testPeruvian)
+        comments = [testData[0][0] , testData[1][0] , testData[2][0] , testData[3][0]]
+        labels = [testData[0][1] , testData[1][1] , testData[2][1] , testData[3][1]]        
+        commentsModeled = []        
+        folders = [pmodelAll , pmodelPNeg , pmodelPNeu , pmodelNegNeu]  
+        names = [nameVectorizer, nameTFVectorizer]                
+        for i in range(len(folders)):
+            loaded = []
+            for j in range(len(names)):
+                location = folders[i] + names[j]
+                print location
+                with open(location , 'rb') as fid:
+                    modelLoaded = cPickle.load(fid)
+                loaded.append(modelLoaded)
+            model = VM()
+            model.set_models(loaded[0], loaded[1])            
+            modelSimple = model.get_comment_frequency_vector(comments[i])
+            modelTFIDF = model.get_comment_tf_idf_vector(comments[i])            
+            vec = [modelSimple , labels[i]]
+            commentsModeled.append(vec)
+            vec = [modelTFIDF , labels[i]]
+            commentsModeled.append(vec)           
+        return commentsModeled
+    
+    def get_data_test_spanish(self):
+        testData = self.get_Traincomments(testSpanish)
+        comments = [testData[0][0] , testData[1][0] , testData[2][0] , testData[3][0]]
+        labels = [testData[0][1] , testData[1][1] , testData[2][1] , testData[3][1]]        
+        commentsModeled = []        
+        folders = [smodelAll , smodelPNeg , smodelPNeu , smodelNegNeu]  
+        names = [nameVectorizer, nameTFVectorizer]                
+        for i in range(len(folders)):
+            loaded = []
+            for j in range(len(names)):
+                location = folders[i] + names[j]
+                print location
+                with open(location , 'rb') as fid:
+                    modelLoaded = cPickle.load(fid)
+                loaded.append(modelLoaded)
+            model = VM()
+            model.set_models(loaded[0], loaded[1])            
+            modelSimple = model.get_comment_frequency_vector(comments[i])
+            modelTFIDF = model.get_comment_tf_idf_vector(comments[i])            
+            vec = [modelSimple , labels[i]]
+            commentsModeled.append(vec)
+            vec = [modelTFIDF , labels[i]]
+            commentsModeled.append(vec)           
+        return commentsModeled
+                    
+    
 if __name__ == '__main__':
     
     manager = SupervisedManager()
-    classifier_loaded = manager.load_classifier(1, 1, 1)
-    classifier = SVM()
-    classifier.set_classifier(classifier_loaded)
+    #classifier_loaded = manager.load_classifier(1, 1, 1)
+    #classifier = SVM()
+    #classifier.set_classifier(classifier_loaded)
     #information = classifier.classify(test_data)
     #manager.prepare_all_models()
     #manager.prepare_all_classifiers()
+    
+    data = manager.get_data_test_spanish()
+    for i in data:
+        print i
     
     
     
