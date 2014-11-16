@@ -459,6 +459,36 @@ class SupervisedManager(object):
             vec = [modelTFIDF , labels[i]]
             commentsModeled.append(vec)           
         return commentsModeled
+    
+    def testClassifier(self , typeClassifier , domain):
+        names =[pclassAll, pclassAllTF, pclassPNeg, pclassPNegTF, pclassPNeu, pclassPNeuTF, pclassNegNeu, pclassNegNeuTF]
+        classifiersP = [peruvianSVM, peruvianNaiveBayes, peruvianMaxEnt, peruvianDecTree]
+        classifiersS = [spanishSVM, spanishNaiveBayes, spanishMaxEnt, spanishDecTree]
+        if domain == 1:
+            dataTest = self.get_data_test_peruvian()
+        else:
+            dataTest = self.get_data_test_spanish()
+        
+        
+        for i in range(1,8):
+            classifier = self.load_classifier(domain, typeClassifier, i)
+            if typeClassifier == 1:
+                print "Analyzing Support Vector Machine"
+                classifierTrained = SVM()
+                classifierTrained.set_classifier(classifier)                 
+            elif typeClassifier == 2:
+                print "Analyzing Naive Bayes"
+                classifierTrained = NB()
+                classifierTrained.set_classifier(classifier)
+            elif typeClassifier == 3:
+                print "Analyzing Max Entropy"
+                classifierTrained = ME()
+                classifierTrained.set_classifier(classifier)
+            elif typeClassifier == 4:
+                print "Analyzing Decision Tree"
+                classifierTrained = DT()
+                classifierTrained.set_classifier(classifier)
+                       
                     
     
 if __name__ == '__main__':
@@ -471,9 +501,7 @@ if __name__ == '__main__':
     #manager.prepare_all_models()
     #manager.prepare_all_classifiers()
     
-    data = manager.get_data_test_spanish()
-    for i in data:
-        print i
+    manager.testClassifier(3, 1)
     
     
     
