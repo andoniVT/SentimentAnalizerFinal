@@ -46,15 +46,18 @@ class SupervisedManager(object):
         folders = [pmodelAll , pmodelPNeg , pmodelPNeu , pmodelNegNeu]  
         names = [nameVectorizer , nameCorpus , nameTFVectorizer , nameTFCorpus]                
         for i in range(len(domainData)):
+            print domainData[i][0]
             model = VM(domainData[i][0])
             allmodels = model.prepare_models() # 0 1 2 3                                    
             for j in range(len(allmodels)):                
+                print folders[i] + names[j]
                 with open(folders[i] + names[j] , 'wb') as fid:
                     cPickle.dump(allmodels[j] , fid)
         
         '''
         Prepare spanish models
         '''
+        
         domainData = self.get_Traincomments(trainSpanish)  # [0 1 2 3]
         folders = [smodelAll , smodelPNeg , smodelPNeu , smodelNegNeu]  
         names = [nameVectorizer , nameCorpus , nameTFVectorizer , nameTFCorpus]                
@@ -63,7 +66,8 @@ class SupervisedManager(object):
             allmodels = model.prepare_models() # 0 1 2 3                                    
             for j in range(len(allmodels)):                
                 with open(folders[i] + names[j] , 'wb') as fid:
-                    cPickle.dump(allmodels[j] , fid) 
+                    cPickle.dump(allmodels[j] , fid)
+         
                                  
     
     def prepare_all_classifiers(self):
@@ -136,8 +140,8 @@ class SupervisedManager(object):
 if __name__ == '__main__':
     
     manager = SupervisedManager()
-    manager.prepare_all_models()
-    #manager.prepare_all_classifiers()
+    #manager.prepare_all_models()
+    manager.prepare_all_classifiers()
     
     '''
     data = [[1,2,3,4] , [5,2,1,4] , [6,1,4,2]]
