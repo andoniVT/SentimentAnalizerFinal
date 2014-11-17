@@ -528,13 +528,16 @@ class SupervisedManager(object):
         
     
     def evaluar(self ,pos , neg, neu , evalPNeg , evalPNeu, evalNegNeu):
+        print "HABERR "
         etapa1 = [] 
         etapa2 = [] 
         etapa3 = []
         for i in range(pos + neg + neu):
             etapa1.append('NOT')
             etapa2.append('NOT')
-            etapa3.append('NOT')    
+            etapa3.append('NOT')
+        print "ETAPAS: "
+        print len(etapa1)    
         for i in range(len(evalPNeg)):
             etapa1[i] = evalPNeg[i]    
         index = 0
@@ -568,18 +571,24 @@ class SupervisedManager(object):
         
         
         all_predictions = []                        
-        #for i in range(3 , 8 , 2):
-        for i in range(4 , 8 , 2):
+        for i in range(3 , 8 , 2):
+        #for i in range(4 , 9 , 2):
+            print "---------------------------"
             print i
             classifier = self.load_classifier(domain, typeClassifier, i)            
-            classifierTrained = SVM()
+            classifierTrained = DT()
             classifierTrained.set_classifier(classifier)
+            print "ok inicio"
             predictions = classifierTrained.classify(dataTest[i-1][0])
-            print len(dataTest[i][0])
+            print "ok fin"
+            print len(dataTest[i-1][0])
             all_predictions.append(predictions)
+            print "---------------------------"
             
-        #result = self.evaluar(94, 133, 173, all_predictions[0], all_predictions[1], all_predictions[2])
-        #self.show_classificator_report(dataTest[0][1], result)
+        print "ALL"
+        print len(all_predictions)
+        result = self.evaluar(94, 133, 173, all_predictions[0], all_predictions[1], all_predictions[2])
+        self.show_classificator_report(dataTest[0][1], result)
          
                        
                     
@@ -594,8 +603,8 @@ if __name__ == '__main__':
     #manager.prepare_all_models()
     #manager.prepare_all_classifiers()
     
-    #manager.testClassifier(4, 2)
-    manager.optimize_classifier(1, 1)
+    #manager.testClassifier(4, 1)
+    manager.optimize_classifier(4, 1)
     
     
     
