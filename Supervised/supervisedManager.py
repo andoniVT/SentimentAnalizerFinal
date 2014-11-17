@@ -526,6 +526,39 @@ class SupervisedManager(object):
                 self.show_classificator_report(y_true, predictions)
             print "------------------------------------------------------------"
         
+    
+    def evaluar(self ,pos , neg, neu , evalPNeg , evalPNeu, evalNegNeu):
+        etapa1 = [] 
+        etapa2 = [] 
+        etapa3 = []
+        for i in range(pos + neg + neu):
+            etapa1.append('NOT')
+            etapa2.append('NOT')
+            etapa3.append('NOT')    
+        for i in range(len(evalPNeg)):
+            etapa1[i] = evalPNeg[i]    
+        index = 0
+        for i in range(pos):
+            etapa2[i] = evalPNeu[index]
+            index+=1
+        for i in range(pos+neg , pos+neg+neu):
+            etapa2[i] = evalPNeu[index]
+            index+=1    
+        index = 0
+        for i in range(pos, pos+neg+neu):
+            etapa3[i] = evalNegNeu[index]
+            index+=1      
+        result = []
+        for i in range(len(etapa1)):
+            if (etapa1[i] == 'P' and etapa2[i] == 'P') or (etapa1[i]=='P' and etapa3[i]=='P') or (etapa2[i]=='P' and etapa3[i]=='P'):
+                value = 'P'
+            elif (etapa1[i] == 'N' and etapa2[i] == 'N') or (etapa1[i]=='N' and etapa3[i]=='N') or (etapa2[i]=='N' and etapa3[i]=='N'):
+                value = 'N'
+            else:
+                value = 'NEU'
+            result.append(value)
+        return result
+    
     def optimize_classifier(self , typeClassifier , domain):                
         classifiersP = [peruvianSVM, peruvianNaiveBayes, peruvianMaxEnt, peruvianDecTree]
         if domain == 1:
@@ -533,9 +566,20 @@ class SupervisedManager(object):
         else:
             dataTest = self.get_data_test_spanish()
         
-        for i in range(3 , 8 , 2):
+        
+        all_predictions = []                        
+        #for i in range(3 , 8 , 2):
+        for i in range(4 , 8 , 2):
             print i
-            classifier = self.load_classifier(domain, typeClassifier, i)
+            classifier = self.load_classifier(domain, typeClassifier, i)            
+            classifierTrained = SVM()
+            classifierTrained.set_classifier(classifier)
+            predictions = classifierTrained.classify(dataTest[i-1][0])
+            print len(dataTest[i][0])
+            all_predictions.append(predictions)
+            
+        #result = self.evaluar(94, 133, 173, all_predictions[0], all_predictions[1], all_predictions[2])
+        #self.show_classificator_report(dataTest[0][1], result)
          
                        
                     
