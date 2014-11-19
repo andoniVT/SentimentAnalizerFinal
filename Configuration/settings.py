@@ -9,10 +9,10 @@ path_cicc2 = '/home/ucsp/workspace'
 path_home ='/home/andoni/Escritorio/PythonProjets/SentimentAnalizerFinal'
 path_home2 = '/home/andoni/Escritorio/PythonProjets'
 
-path = path_cicc
-#path = path_home
-#path_classifiers = path_home2
-path_classifiers = path_cicc2
+#path = path_cicc
+path = path_home
+path_classifiers = path_home2
+#path_classifiers = path_cicc2
 
 '''resource '''
 big_text = path + '/Resource/big2.txt'

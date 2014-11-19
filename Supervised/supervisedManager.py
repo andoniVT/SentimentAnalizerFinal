@@ -568,29 +568,81 @@ class SupervisedManager(object):
             dataTest = self.get_data_test_peruvian()
         else:
             dataTest = self.get_data_test_spanish()
-        
-        
+                
         all_predictions = []                        
         for i in range(3 , 8 , 2):
         #for i in range(4 , 9 , 2):
             print "---------------------------"
             print i
-            classifier = self.load_classifier(domain, typeClassifier, i)            
-            classifierTrained = DT()
-            classifierTrained.set_classifier(classifier)
-            print "ok inicio"
-            predictions = classifierTrained.classify(dataTest[i-1][0])
-            print "ok fin"
-            print len(dataTest[i-1][0])
-            all_predictions.append(predictions)
+            classifier = self.load_classifier(domain, typeClassifier, i)
+            if typeClassifier == 1:
+                classifierTrained = SVM()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
+            elif typeClassifier == 2:
+                classifierTrained = NB()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
+            elif typeClassifier == 3:
+                classifierTrained = ME()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
+            elif typeClassifier == 4:
+                classifierTrained = DT()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
             print "---------------------------"
             
         print "ALL"
         print len(all_predictions)
         result = self.evaluar(94, 133, 173, all_predictions[0], all_predictions[1], all_predictions[2])
         self.show_classificator_report(dataTest[0][1], result)
-         
-                       
+        return result
+        
+    def optimize_classifierTFIDF(self , typeClassifier , domain):                
+        classifiersP = [peruvianSVM, peruvianNaiveBayes, peruvianMaxEnt, peruvianDecTree]
+        if domain == 1:
+            dataTest = self.get_data_test_peruvian()
+        else:
+            dataTest = self.get_data_test_spanish()
+                
+        all_predictions = []                        
+        #for i in range(3 , 8 , 2):
+        for i in range(4 , 9 , 2):
+            print "---------------------------"
+            print i
+            classifier = self.load_classifier(domain, typeClassifier, i)
+            if typeClassifier == 1:
+                classifierTrained = SVM()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
+            elif typeClassifier == 2:
+                classifierTrained = NB()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
+            elif typeClassifier == 3:
+                classifierTrained = ME()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
+            elif typeClassifier == 4:
+                classifierTrained = DT()
+                classifierTrained.set_classifier(classifier)
+                predictions = classifierTrained.classify(dataTest[i-1][0])
+                all_predictions.append(predictions)
+            print "---------------------------"
+            
+        print "ALL"
+        print len(all_predictions)
+        result = self.evaluar(94, 133, 173, all_predictions[0], all_predictions[1], all_predictions[2])
+        self.show_classificator_report(dataTest[0][1], result)
+        return result
                     
     
 if __name__ == '__main__':
@@ -604,7 +656,8 @@ if __name__ == '__main__':
     #manager.prepare_all_classifiers()
     
     #manager.testClassifier(4, 1)
-    manager.optimize_classifier(4, 1)
+    results = manager.optimize_classifier(1, 1)
+    print results
     
     
     
