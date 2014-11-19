@@ -4,6 +4,9 @@ Created on 19/11/2014
 @author: andoni
 '''
 
+from Supervised.supervisedManager import SupervisedManager as SM
+
+
 def NaiveVoting(matrix):    
     positive = []
     negative = []
@@ -32,5 +35,37 @@ def NaiveVoting(matrix):
 
 if __name__ == '__main__':
     
-    matrix = [['P','P','NEU','N','P'],['P','N','NEU','P','P'],['N','NEU','P','P','N'],['P','P','NEU','NEU','P']]
-    NaiveVoting(matrix)
+    #matrix = [['P','P','NEU','N','P'],['P','N','NEU','P','P'],['N','NEU','P','P','N'],['P','P','NEU','NEU','P']]
+    #NaiveVoting(matrix)
+    
+    
+    manager = SM()
+    resultSVM = manager.optimize_classifierTFIDF(1, 1)
+    resultNB = manager.optimize_classifierTFIDF(2, 1)
+    resultME = manager.optimize_classifierTFIDF(3, 1)
+    resultDT = manager.optimize_classifierTFIDF(4, 1)
+    
+    print "Result SVM"
+    print resultSVM[0] 
+    print "Result NB"
+    print resultNB[0]
+    print "Result ME"
+    print resultME[0]
+    print "Result DT"
+    print resultDT[0]
+    
+    
+    matrix = [resultSVM[0] , resultNB[0] , resultME[0] , resultDT[0]]
+    
+    final_results = NaiveVoting(matrix)
+    print "Final Result"
+    print final_results
+    
+    y_true = resultSVM[1]
+    
+    manager.show_classificator_report(y_true, final_results)
+    
+    
+    
+    
+    

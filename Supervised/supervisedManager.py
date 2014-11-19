@@ -642,7 +642,7 @@ class SupervisedManager(object):
         print len(all_predictions)
         result = self.evaluar(94, 133, 173, all_predictions[0], all_predictions[1], all_predictions[2])
         self.show_classificator_report(dataTest[0][1], result)
-        return result
+        return [result , dataTest[0][1]]
                     
     
 if __name__ == '__main__':
